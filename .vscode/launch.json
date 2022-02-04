@@ -9,7 +9,7 @@
             "name": "chrome headless",
             "url": "http://localhost:3000",
             "request": "launch",
-            "webRoot": "${workspaceFolder}/bla1",
+            "webRoot": "${workspaceFolder}/bla1/",
             "type": "pwa-chrome",
             "port": 9222
         },
