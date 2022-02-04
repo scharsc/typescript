@@ -1,6 +1,6 @@
 const button = document.querySelector('button')!;
 
-console.log("blaxss");
+console.log("blassxssXX");
 
 button.addEventListener( 'click', () => {
     console.log("clicked");
