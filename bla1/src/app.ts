@@ -1,53 +1,11 @@
-class Department
-{
-    private employees: string[] = [];
+//type FuncType = (n1: number, n2: number)  => number;
 
-    get lastRecentEmployee()
-    {
-        if( this.employees.length <= 0 )
-            throw Error("bls");
-        return this.employees[this.employees.length - 1];
-    }
+interface FuncType {
+    (n1: number, n2: number): number;
+} 
 
-    constructor(private readonly name: string)
-    {
-    }
+let AddFunc : FuncType;
 
-    describe(this: Department) {
-        console.log('description of xDepartment: ' + this.name);
-    }
+AddFunc = (n1: number, n2: number) : number => n1+ n2;
 
-    addEmployee(employee: string)
-    {
-        this.employees.push(employee);
-    }
-
-    printEmployeeInformation()
-    {
-        console.log(this.employees.length);
-        console.log(this.employees);
-    }
-}
-
-class ITDepartment extends Department
-{
-    constructor(public admins: string[]) 
-    {
-        super("It");
-    }
-}
-
-const it = new ITDepartment(["Max"]);
-console.log(it);
-const accountingCopy = { name: "dummy", describe: it.describe };
-
-it.describe();
-
-it.addEmployee('Max');
-
-it.addEmployee('Manu');
-
-it.printEmployeeInformation();
-// accountingCopy.describe();
-
-console.log( "last recent it employee:" + it.lastRecentEmployee );
+console.log(  AddFunc(4,10) );
