@@ -5,7 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "runtimeArgs": ["--headless", "--disable-gpu", "--remote-debugging-port=9222"],
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "pwa-chrome",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "runtimeArgs": ["--disable-gpu", "--remote-debugging-port=9222"],
             "name": "chrome headless",
             "url": "http://localhost:3000",
             "request": "launch",
