@@ -127,9 +127,24 @@ abstract class Component<HostElemT extends HTMLElement,ElemT extends HTMLElement
     }
 }
 
+
+class ProjectItem extends Component< HTMLUListElement, HTMLLIElement >
+{
+    constructor( projectListId: string, private item: Project )
+    {
+        super('single-project', projectListId, 'singleProjectID', 'beforeend');
+        this.render();
+    }
+
+    private render()
+    {
+        this.element.textContent = this.item.title;
+    }
+}
+
 class ProjectList extends Component<HTMLDivElement, HTMLElement>
 {
-    assignedProjects: Project[];
+    assignedProjects: Project[]; 
 
     constructor(private type: 'active' | 'finished')
     {
@@ -151,20 +166,20 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement>
 
     private renderProjects()
     {
-        const listEl = document.getElementById(`${this.type}-project-list`) as HTMLUListElement ;
+        const listEl = document.getElementById(this.listId()) as HTMLUListElement ;
         listEl.innerHTML = '';
         for( const projItem of this.assignedProjects )
-        {
-            const listItem = document.createElement('li');
-            listItem.textContent = projItem.title;
-            listEl?.appendChild(listItem); 
-        }
+            new ProjectItem(this.listId(), projItem);
+    }
+
+    private listId() : string
+    {
+        return `${this.type}-project-list`;
     }
 
     private renderContent()
     {
-        const listId = `${this.type}-project-list`;
-        this.element.querySelector('ul')!.id = listId;
+        this.element.querySelector('ul')!.id = this.listId();
         this.element.querySelector('h2')!.textContent = this.type.toUpperCase() + " PROJECTS";
     }
 
