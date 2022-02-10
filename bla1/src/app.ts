@@ -11,24 +11,33 @@ class Project
     {}
 }
 
-type Listener = (items: Project[]) => void;
-  
-class ProjectState
+type Listener<T> = (items: T[]) => void;
+
+class State<T>
 {
-    private listeners: Listener[] = [];
+    protected listeners: Listener<T>[] = [];
+
+    @autobind
+    addListener( listenerFn: Listener<T> )
+    {
+        this.listeners.push(listenerFn);
+    }
+}
+
+class ProjectState extends State<Project>
+{
     private projects: any[] = [];
     private static instance: ProjectState;
+
+    private constructor()
+    {
+        super();
+    }
 
     static getInstance(){
         if(!this.instance)
             this.instance = new ProjectState();
         return this.instance;
-    }
-
-    @autobind
-    addListener( listenerFn: Listener )
-    {
-        this.listeners.push(listenerFn);
     }
 
     addProject(title: string, description: string, numOfPeople: number)
@@ -46,7 +55,7 @@ class ProjectState
     }
 }
 
-const projectState = new ProjectState();
+const projectState = ProjectState.getInstance();
 
 
 interface Validatable 
