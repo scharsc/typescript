@@ -92,7 +92,7 @@ function autobind ( _: any, _2: string, desciptor: PropertyDescriptor )
     }
 }
 
-class Component<HostElemT extends HTMLElement,ElemT extends HTMLElement>
+abstract class Component<HostElemT extends HTMLElement,ElemT extends HTMLElement>
 {
     templateElement: HTMLTemplateElement;
     hostElement: HostElemT;
